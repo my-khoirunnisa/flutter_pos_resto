@@ -1,4 +1,4 @@
-# pos_resto_fic14
+# flutter_pos_resto
 
 A new Flutter project.
 
