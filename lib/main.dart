@@ -4,10 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pos_resto_fic14/core/constants/colors.dart';
 import 'package:pos_resto_fic14/data/datasources/auth_local_datasource.dart';
 import 'package:pos_resto_fic14/data/datasources/auth_remote_datasource.dart';
+import 'package:pos_resto_fic14/data/datasources/product_local_datasource.dart';
+import 'package:pos_resto_fic14/data/datasources/product_remote_datasource.dart';
 import 'package:pos_resto_fic14/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:pos_resto_fic14/presentation/auth/bloc/logout/logout_bloc.dart';
 import 'package:pos_resto_fic14/presentation/auth/login_page.dart';
+import 'package:pos_resto_fic14/presentation/home/bloc/checkout/checkout_bloc.dart';
+import 'package:pos_resto_fic14/presentation/home/bloc/local_product/local_product_bloc.dart';
 import 'package:pos_resto_fic14/presentation/home/pages/dashboard_page.dart';
+import 'package:pos_resto_fic14/presentation/setting/bloc/sync_product/sync_product_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +30,16 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LogoutBloc(AuthRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => SyncProductBloc(ProductRemoteDataSource()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              LocalProductBloc(ProductLocalDataSource.instance),
+        ),
+        BlocProvider(
+          create: (context) => CheckoutBloc(),
         ),
       ],
       child: MaterialApp(

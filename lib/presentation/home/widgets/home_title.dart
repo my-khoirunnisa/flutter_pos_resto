@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos_resto_fic14/core/core.dart';
 import '../../../core/components/search_input.dart';
-import '../../../core/constants/colors.dart';
-
-
 
 class HomeTitle extends StatelessWidget {
   final TextEditingController controller;
@@ -24,7 +21,7 @@ class HomeTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Resto with Bahri POS',
+              'Resto POS',
               style: TextStyle(
                 color: AppColors.primary,
                 fontSize: 22,
