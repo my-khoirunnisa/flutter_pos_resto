@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pos_resto_fic14/core/core.dart';
+import 'package:flutter_posresto_app/core/extensions/build_context_ext.dart';
+
+import '../constants/colors.dart';
+
+
 
 class TabCustom extends StatelessWidget {
   final List<TabMenu> children;

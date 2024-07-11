@@ -1,8 +1,8 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pos_resto_fic14/data/models/response/product_response_model.dart';
-import 'package:pos_resto_fic14/presentation/home/models/product_quantity.dart';
-
+import '../../../../data/models/response/product_response_model.dart';
+import '../../models/product_quantity.dart';
 part 'checkout_event.dart';
 part 'checkout_state.dart';
 part 'checkout_bloc.freezed.dart';

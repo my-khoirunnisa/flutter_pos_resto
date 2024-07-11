@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos_resto_fic14/core/core.dart';
-import 'package:pos_resto_fic14/data/datasources/product_local_datasource.dart';
-import 'package:pos_resto_fic14/presentation/setting/bloc/sync_product/sync_product_bloc.dart';
+import 'package:flutter_posresto_app/data/datasources/product_local_datasource.dart';
+import 'package:flutter_posresto_app/presentation/setting/bloc/sync_order/sync_order_bloc.dart';
+import 'package:flutter_posresto_app/presentation/setting/bloc/sync_product/sync_product_bloc.dart';
 
-class SyncDataPage extends StatelessWidget {
+class SyncDataPage extends StatefulWidget {
   const SyncDataPage({super.key});
 
+  @override
+  State<SyncDataPage> createState() => _SyncDataPageState();
+}
+
+class _SyncDataPageState extends State<SyncDataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +33,14 @@ class SyncDataPage extends StatelessWidget {
                   );
                 },
                 loaded: (productResponseModel) {
-                  ProductLocalDataSource.instance.deleteAllProducts();
-                  ProductLocalDataSource.instance.insertProducts(
+                  ProductLocalDatasource.instance.deleteAllProducts();
+                  ProductLocalDatasource.instance.insertProducts(
                     productResponseModel.data!,
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Sync Product Success'),
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: Colors.green,
                     ),
                   );
                 },
@@ -60,6 +65,48 @@ class SyncDataPage extends StatelessWidget {
               );
             },
           ),
+          BlocConsumer<SyncOrderBloc, SyncOrderState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                orElse: () {},
+                error: (message) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(message),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                },
+                loaded: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Sync Order Success'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                },
+              );
+            },
+            builder: (context, state) {
+              return state.maybeWhen(
+                orElse: () {
+                  return ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<SyncOrderBloc>()
+                          .add(const SyncOrderEvent.syncOrder());
+                    },
+                    child: const Text('Sync Order'),
+                  );
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              );
+            },
+          )
         ],
       ),
     );

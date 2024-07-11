@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pos_resto_fic14/core/core.dart';
+import 'package:flutter_posresto_app/core/extensions/date_time_ext.dart';
+
 import '../../../core/components/search_input.dart';
+import '../../../core/constants/colors.dart';
 
 class HomeTitle extends StatelessWidget {
   final TextEditingController controller;

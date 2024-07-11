@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos_resto_fic14/core/core.dart';
-import 'package:pos_resto_fic14/data/datasources/auth_local_datasource.dart';
-import 'package:pos_resto_fic14/presentation/auth/login_page.dart';
-import 'package:pos_resto_fic14/presentation/setting/pages/sync_data_page.dart';
+import 'package:flutter_posresto_app/core/constants/colors.dart';
+import 'package:flutter_posresto_app/core/extensions/build_context_ext.dart';
+import 'package:flutter_posresto_app/data/datasources/auth_local_datasource.dart';
+import 'package:flutter_posresto_app/presentation/auth/login_page.dart';
+import 'package:flutter_posresto_app/presentation/setting/pages/sync_data_page.dart';
+
+import '../../../core/assets/assets.gen.dart';
 import '../../auth/bloc/logout/logout_bloc.dart';
 import '../widgets/nav_item.dart';
 import 'home_page.dart';
@@ -24,7 +27,7 @@ class _DashboardPageState extends State<DashboardPage> {
     const Center(child: Text('This is page 2')),
     const Center(child: Text('This is page 3')),
     // const Center(child: Text('This is page 4')),
-    const SyncDataPage()
+    const SyncDataPage(),
     // const ManagePrinterPage(),
     // const SettingsPage(),
   ];

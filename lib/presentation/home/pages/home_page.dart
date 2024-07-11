@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pos_resto_fic14/presentation/home/bloc/checkout/checkout_bloc.dart';
-import 'package:pos_resto_fic14/presentation/home/bloc/local_product/local_product_bloc.dart';
-import 'package:pos_resto_fic14/presentation/home/widgets/order_menu.dart';
+import 'package:flutter_posresto_app/core/extensions/build_context_ext.dart';
+import 'package:flutter_posresto_app/core/extensions/int_ext.dart';
+import 'package:flutter_posresto_app/core/extensions/string_ext.dart';
+import 'package:flutter_posresto_app/presentation/home/bloc/local_product/local_product_bloc.dart';
+import 'package:flutter_posresto_app/presentation/home/pages/confirm_payment_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
+import '../bloc/checkout/checkout_bloc.dart';
 import '../widgets/column_button.dart';
 import '../widgets/custom_tab_bar.dart';
 import '../widgets/home_title.dart';
+import '../widgets/order_menu.dart';
 import '../widgets/product_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -207,8 +211,7 @@ class _HomePageState extends State<HomePage> {
                             'Semua',
                             'Makanan',
                             'Minuman',
-                            'Snack',
-                            'Lain-lain',
+                            'Snack'
                           ],
                           initialTabIndex: 0,
                           tabViews: [
@@ -392,53 +395,6 @@ class _HomePageState extends State<HomePage> {
                                         data: products
                                             .where((element) =>
                                                 element.category!.id! == 3)
-                                            .toList()[index],
-                                        onCartButton: () {},
-                                      ),
-                                    );
-                                  });
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              child: BlocBuilder<LocalProductBloc,
-                                  LocalProductState>(
-                                builder: (context, state) {
-                                  return state.maybeWhen(orElse: () {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }, loading: () {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }, loaded: (products) {
-                                    if (products.isEmpty) {
-                                      return const Center(
-                                        child: Text('No Items'),
-                                      );
-                                    }
-                                    return GridView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: products
-                                          .where((element) =>
-                                              element.category!.id! == 4)
-                                          .toList()
-                                          .length,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                        childAspectRatio: 0.85,
-                                        crossAxisCount: 3,
-                                        crossAxisSpacing: 30.0,
-                                        mainAxisSpacing: 30.0,
-                                      ),
-                                      itemBuilder: (context, index) =>
-                                          ProductCard(
-                                        data: products
-                                            .where((element) =>
-                                                element.category!.id! == 4)
                                             .toList()[index],
                                         onCartButton: () {},
                                       ),
@@ -692,21 +648,32 @@ class _HomePageState extends State<HomePage> {
                                 'Sub total',
                                 style: TextStyle(color: AppColors.grey),
                               ),
-                              // BlocBuilder<CheckoutBloc, CheckoutState>(
-                              //   builder: (context, state) {
-                              //     final price = state.maybeWhen(
-                              //       orElse: () => 0,
-                              //       success: (products, qty, price) => price,
-                              //     );
-                              //     return Text(
-                              //       price.currencyFormatRp,
-                              //       style: const TextStyle(
-                              //         color: AppColors.primary,
-                              //         fontWeight: FontWeight.w600,
-                              //       ),
-                              //     );
-                              //   },
-                              // ),
+                              BlocBuilder<CheckoutBloc, CheckoutState>(
+                                builder: (context, state) {
+                                  final price = state.maybeWhen(
+                                      orElse: () => 0,
+                                      loaded: (products) {
+                                        if (products.isEmpty) {
+                                          return 0;
+                                        }
+                                        return products
+                                            .map((e) =>
+                                                e.product.price!
+                                                    .toIntegerFromText *
+                                                e.quantity)
+                                            .reduce((value, element) =>
+                                                value + element);
+                                      });
+
+                                  return Text(
+                                    price.currencyFormatRp,
+                                    style: const TextStyle(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                           const SpaceHeight(100.0),
@@ -722,7 +689,7 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 24.0, vertical: 16.0),
                           child: Button.filled(
                             onPressed: () {
-                              // context.push(const ConfirmPaymentPage());
+                              context.push(const ConfirmPaymentPage());
                             },
                             label: 'Lanjutkan Pembayaran',
                           ),

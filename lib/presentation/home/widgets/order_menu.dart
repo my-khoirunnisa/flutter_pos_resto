@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pos_resto_fic14/core/constants/variables.dart';
-import 'package:pos_resto_fic14/core/core.dart';
-import 'package:pos_resto_fic14/presentation/home/models/product_quantity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_posresto_app/core/constants/variables.dart';
+import 'package:flutter_posresto_app/core/extensions/int_ext.dart';
+import 'package:flutter_posresto_app/core/extensions/string_ext.dart';
+import 'package:flutter_posresto_app/presentation/home/bloc/checkout/checkout_bloc.dart';
+import 'package:flutter_posresto_app/presentation/home/models/product_quantity.dart';
 
 import '../../../core/components/spaces.dart';
+import '../../../core/constants/colors.dart';
+
 
 class OrderMenu extends StatelessWidget {
   final ProductQuantity data;
@@ -69,6 +74,10 @@ class OrderMenu extends StatelessWidget {
                     //   // data.quantity--;
                     //   // setState(() {});
                     // }
+
+                    context
+                        .read<CheckoutBloc>()
+                        .add(CheckoutEvent.removeItem(data.product));
                   },
                   child: Container(
                     width: 30,
@@ -95,6 +104,9 @@ class OrderMenu extends StatelessWidget {
                     //     onDeleteTap();
                     // data.quantity++;
                     // setState(() {});
+                    context
+                        .read<CheckoutBloc>()
+                        .add(CheckoutEvent.addItem(data.product));
                   },
                   child: Container(
                     width: 30,

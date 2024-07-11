@@ -1,4 +1,4 @@
-import 'package:pos_resto_fic14/data/models/response/auth_response_model.dart';
+import 'package:flutter_posresto_app/data/models/response/auth_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthLocalDataSource {

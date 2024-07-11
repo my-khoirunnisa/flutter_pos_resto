@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pos_resto_fic14/core/assets/assets.gen.dart';
-import 'package:pos_resto_fic14/core/constants/colors.dart';
+
+
+import '../assets/assets.gen.dart';
+import '../constants/colors.dart';
 import 'buttons.dart';
 import 'spaces.dart';
 

@@ -1,6 +1,6 @@
 {
-    "name": "pos_resto_fic14",
-    "short_name": "pos_resto_fic14",
+    "name": "flutter_posresto_app",
+    "short_name": "flutter_posresto_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_posresto_app/data/datasources/auth_local_datasource.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pos_resto_fic14/core/assets/assets.gen.dart';
-import 'package:pos_resto_fic14/core/components/buttons.dart';
-import 'package:pos_resto_fic14/core/components/custom_text_field.dart';
-import 'package:pos_resto_fic14/core/components/spaces.dart';
-import 'package:pos_resto_fic14/core/constants/colors.dart';
-import 'package:pos_resto_fic14/data/datasources/auth_local_datasource.dart';
-import 'package:pos_resto_fic14/presentation/auth/bloc/login/login_bloc.dart';
-import 'package:pos_resto_fic14/presentation/home/pages/dashboard_page.dart';
+
+import '../../core/assets/assets.gen.dart';
+import '../../core/components/buttons.dart';
+import '../../core/components/custom_text_field.dart';
+import '../../core/components/spaces.dart';
+import '../../core/constants/colors.dart';
+import '../home/pages/dashboard_page.dart';
+import 'bloc/login/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -47,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
           const SpaceHeight(24.0),
           const Center(
             child: Text(
-              'POS RESTO BATCH 14',
+              'RESTO WITH BAHRI',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -81,44 +83,48 @@ class _LoginPageState extends State<LoginPage> {
           BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
               state.maybeWhen(
-                  orElse: () {},
-                  success: (authResponseModel) {
-                    AuthLocalDataSource().saveAuthData(authResponseModel);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DashboardPage(),
-                      ),
-                    );
-                  },
-                  error: (message) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(message),
-                        backgroundColor: AppColors.red,
-                      ),
-                    );
-                  });
+                orElse: () {},
+                success: (authResponseModel) {
+                  AuthLocalDataSource().saveAuthData(authResponseModel);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DashboardPage(),
+                    ),
+                  );
+                },
+                error: (message) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(message),
+                      backgroundColor: AppColors.red,
+                    ),
+                  );
+                },
+              );
             },
             child: BlocBuilder<LoginBloc, LoginState>(
               builder: (context, state) {
-                return state.maybeWhen(orElse: () {
-                  return Button.filled(
-                    onPressed: () {
-                      context.read<LoginBloc>().add(
-                            LoginEvent.login(
-                              email: emailController.text,
-                              password: passwordController.text,
-                            ),
-                          );
-                    },
-                    label: 'Masuk',
-                  );
-                }, loading: () {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                });
+                return state.maybeWhen(
+                  orElse: () {
+                    return Button.filled(
+                      onPressed: () {
+                        context.read<LoginBloc>().add(
+                              LoginEvent.login(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              ),
+                            );
+                      },
+                      label: 'Masuk',
+                    );
+                  },
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                );
               },
             ),
           ),

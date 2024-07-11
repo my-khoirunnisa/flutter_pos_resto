@@ -1,10 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:pos_resto_fic14/data/datasources/auth_remote_datasource.dart';
-
+import '../../../../data/datasources/auth_remote_datasource.dart';
 part 'logout_bloc.freezed.dart';
 part 'logout_event.dart';
 part 'logout_state.dart';
@@ -14,7 +10,7 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
   LogoutBloc(
     this.authRemoteDatasource,
   ) : super(const _Initial()) {
-    on<LogoutEvent>((event, emit) async {
+    on<_Logout>((event, emit) async{
       emit(const _Loading());
       final result = await authRemoteDatasource.logout();
       result.fold(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pos_resto_fic14/core/constants/colors.dart';
+
+import '../constants/colors.dart';
+
+
 
 class SearchInput extends StatelessWidget {
   final TextEditingController controller;
