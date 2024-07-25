@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
 
-
 enum ButtonStyle { filled, outlined }
 
 class Button extends StatelessWidget {

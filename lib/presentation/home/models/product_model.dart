@@ -1,6 +1,4 @@
-
 import 'package:flutter_posresto_app/core/extensions/int_ext.dart';
-
 import 'product_category.dart';
 
 class ProductModel {

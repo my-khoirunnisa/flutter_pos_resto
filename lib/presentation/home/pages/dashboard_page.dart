@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_posresto_app/core/constants/colors.dart';
 import 'package:flutter_posresto_app/core/extensions/build_context_ext.dart';
-import 'package:flutter_posresto_app/data/datasources/auth_local_datasource.dart';
-import 'package:flutter_posresto_app/presentation/auth/login_page.dart';
-import 'package:flutter_posresto_app/presentation/setting/pages/sync_data_page.dart';
+import 'package:flutter_posresto_app/presentation/home/pages/home_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
+import '../../../core/constants/colors.dart';
+import '../../../data/datasource/auth_local_datasource.dart';
 import '../../auth/bloc/logout/logout_bloc.dart';
+import '../../auth/login_page.dart';
 import '../widgets/nav_item.dart';
-import 'home_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -23,23 +22,21 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    // const Center(child: Text('This is page 1')),
     const Center(child: Text('This is page 2')),
     const Center(child: Text('This is page 3')),
-    // const Center(child: Text('This is page 4')),
-    const SyncDataPage(),
+    const Center(child: Text('This is page 4')),
     // const ManagePrinterPage(),
     // const SettingsPage(),
   ];
 
-  void _onItemTapped(int index) {
-    _selectedIndex = index;
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
+  }
+
+  void _onItemTapped(int index) {
+    _selectedIndex = index;
+    setState(() {});
   }
 
   @override
@@ -91,7 +88,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 );
                               },
                               success: (value) {
-                                AuthLocalDataSource().removeAuthData();
+                                AuthLocalDatasource().removeAuthData();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text('Logout success'),

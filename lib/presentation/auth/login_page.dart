@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_posresto_app/data/datasources/auth_local_datasource.dart';
-
+import 'package:flutter_posresto_app/presentation/auth/bloc/login/login_bloc.dart';
+import 'package:flutter_posresto_app/presentation/home/pages/dashboard_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/assets/assets.gen.dart';
@@ -9,8 +9,7 @@ import '../../core/components/buttons.dart';
 import '../../core/components/custom_text_field.dart';
 import '../../core/components/spaces.dart';
 import '../../core/constants/colors.dart';
-import '../home/pages/dashboard_page.dart';
-import 'bloc/login/login_bloc.dart';
+import '../../data/datasource/auth_local_datasource.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -49,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
           const SpaceHeight(24.0),
           const Center(
             child: Text(
-              'RESTO WITH BAHRI',
+              'HAPPY POS RESTO',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -85,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
               state.maybeWhen(
                 orElse: () {},
                 success: (authResponseModel) {
-                  AuthLocalDataSource().saveAuthData(authResponseModel);
+                  AuthLocalDatasource().saveAuthData(authResponseModel);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -105,26 +104,23 @@ class _LoginPageState extends State<LoginPage> {
             },
             child: BlocBuilder<LoginBloc, LoginState>(
               builder: (context, state) {
-                return state.maybeWhen(
-                  orElse: () {
-                    return Button.filled(
-                      onPressed: () {
-                        context.read<LoginBloc>().add(
-                              LoginEvent.login(
-                                email: emailController.text,
-                                password: passwordController.text,
-                              ),
-                            );
-                      },
-                      label: 'Masuk',
-                    );
-                  },
-                  loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                );
+                return state.maybeWhen(orElse: () {
+                  return Button.filled(
+                    onPressed: () {
+                      context.read<LoginBloc>().add(
+                            LoginEvent.login(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            ),
+                          );
+                    },
+                    label: 'Masuk',
+                  );
+                }, loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                });
               },
             ),
           ),

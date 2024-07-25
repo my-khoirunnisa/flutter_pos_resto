@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_posresto_app/core/extensions/build_context_ext.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-
 import '../constants/colors.dart';
 import 'components.dart';
 

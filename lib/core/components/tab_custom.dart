@@ -3,8 +3,6 @@ import 'package:flutter_posresto_app/core/extensions/build_context_ext.dart';
 
 import '../constants/colors.dart';
 
-
-
 class TabCustom extends StatelessWidget {
   final List<TabMenu> children;
   final EdgeInsetsGeometry? padding;

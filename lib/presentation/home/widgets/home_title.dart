@@ -4,6 +4,8 @@ import 'package:flutter_posresto_app/core/extensions/date_time_ext.dart';
 import '../../../core/components/search_input.dart';
 import '../../../core/constants/colors.dart';
 
+
+
 class HomeTitle extends StatelessWidget {
   final TextEditingController controller;
   final Function(String value)? onChanged;
@@ -23,7 +25,7 @@ class HomeTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Resto POS',
+              'Resto with Bahri POS',
               style: TextStyle(
                 color: AppColors.primary,
                 fontSize: 22,
