@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_posresto_app/core/extensions/build_context_ext.dart';
 import 'package:flutter_posresto_app/presentation/home/pages/home_page.dart';
+import 'package:flutter_posresto_app/presentation/setting/pages/sync_data_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/constants/colors.dart';
@@ -24,7 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
     const HomePage(),
     const Center(child: Text('This is page 2')),
     const Center(child: Text('This is page 3')),
-    const Center(child: Text('This is page 4')),
+    const SyncDataPage()
     // const ManagePrinterPage(),
     // const SettingsPage(),
   ];

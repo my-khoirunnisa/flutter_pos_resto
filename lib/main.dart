@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_posresto_app/core/constants/colors.dart';
 import 'package:flutter_posresto_app/data/datasource/auth_local_datasource.dart';
 import 'package:flutter_posresto_app/data/datasource/auth_remote_datasource.dart';
+import 'package:flutter_posresto_app/data/datasource/order_remote_datasource.dart';
+import 'package:flutter_posresto_app/data/datasource/product_local_datasource.dart';
+import 'package:flutter_posresto_app/data/datasource/product_remote_datasource.dart';
 import 'package:flutter_posresto_app/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:flutter_posresto_app/presentation/auth/bloc/logout/logout_bloc.dart';
 import 'package:flutter_posresto_app/presentation/auth/login_page.dart';
+import 'package:flutter_posresto_app/presentation/home/bloc/checkout/checkout_bloc.dart';
+import 'package:flutter_posresto_app/presentation/home/bloc/local_product/local_product_bloc.dart';
+import 'package:flutter_posresto_app/presentation/home/bloc/order/order_bloc.dart';
 import 'package:flutter_posresto_app/presentation/home/pages/dashboard_page.dart';
+import 'package:flutter_posresto_app/presentation/setting/pages/bloc/sync_order/sync_order_bloc.dart';
+import 'package:flutter_posresto_app/presentation/setting/pages/bloc/sync_product/sync_product_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,6 +34,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LogoutBloc(AuthRemoteDatasource()),
         ),
+        BlocProvider(
+          create: (context) => SyncProductBloc(ProductRemoteDatasource()),
+        ),
+        BlocProvider(
+            create: (context) =>
+                LocalProductBloc(ProductLocalDatasource.instance)),
+        BlocProvider(
+          create: (context) => CheckoutBloc(),
+        ),
+        BlocProvider(
+          create: (context) => OrderBloc(),
+        ),
+        BlocProvider(create: (context) => SyncOrderBloc(OrderRemoteDatasource()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
