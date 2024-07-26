@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../../data/datasource/order_remote_datasource.dart';
-import '../../../../../data/datasource/product_local_datasource.dart';
+import '../../../../data/datasource/order_remote_datasource.dart';
+import '../../../../data/datasource/product_local_datasource.dart';
 
 part 'sync_order_event.dart';
 part 'sync_order_state.dart';

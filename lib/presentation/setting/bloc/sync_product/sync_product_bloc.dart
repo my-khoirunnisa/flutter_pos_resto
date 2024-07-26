@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_posresto_app/data/model/product_response_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../../data/datasource/product_remote_datasource.dart';
+import '../../../../data/datasource/product_remote_datasource.dart';
 part 'sync_product_event.dart';
 part 'sync_product_state.dart';
 part 'sync_product_bloc.freezed.dart';

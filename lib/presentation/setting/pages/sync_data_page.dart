@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_posresto_app/core/constants/colors.dart';
-import 'package:flutter_posresto_app/presentation/setting/pages/bloc/sync_order/sync_order_bloc.dart';
-import 'package:flutter_posresto_app/presentation/setting/pages/bloc/sync_product/sync_product_bloc.dart';
+import 'package:flutter_posresto_app/presentation/setting/bloc/sync_order/sync_order_bloc.dart';
+import 'package:flutter_posresto_app/presentation/setting/bloc/sync_product/sync_product_bloc.dart';
 
 import '../../../data/datasource/product_local_datasource.dart';
 
