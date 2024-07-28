@@ -37,7 +37,7 @@ class DiscountRemoteDatasource {
       'type': 'percentage',
     });
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       return const Right(true);
     } else {
       return const Left('Failed to add discount');

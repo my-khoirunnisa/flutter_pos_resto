@@ -1,8 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../../../data/datasource/discount_remote_datasource.dart';
-
 part 'add_discount_bloc.freezed.dart';
 part 'add_discount_event.dart';
 part 'add_discount_state.dart';

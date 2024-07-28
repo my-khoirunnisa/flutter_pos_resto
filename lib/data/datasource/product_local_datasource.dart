@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../presentation/home/models/order_model.dart';
@@ -76,7 +77,7 @@ class ProductLocalDatasource {
     return _database!;
   }
 
-    //save order
+  //save order
   Future<void> saveOrder(OrderModel order) async {
     final db = await instance.database;
     int id = await db.insert(tableOrder, order.toMap(),
@@ -108,7 +109,7 @@ class ProductLocalDatasource {
       // where: 'transaction_time BETWEEN ? AND ?',
       // whereArgs: [
       //   DateFormat.yMd().format(start),
-      //   DateFormat.yMd().format(end)
+      //   DateFormat.yMd().format(end),
       // ],
     );
     return List.generate(maps.length, (i) {
@@ -140,7 +141,8 @@ class ProductLocalDatasource {
   Future<void> insertProducts(List<Product> products) async {
     final db = await instance.database;
     for (var product in products) {
-      await db.insert(tableProduct, product.toLocalMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+      await db.insert(tableProduct, product.toLocalMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
       print('inserted success ${product.name}');
     }
   }
